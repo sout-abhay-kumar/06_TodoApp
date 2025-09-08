@@ -5,7 +5,7 @@ import EditIcon from "../icons8-edit-30.png";
 import TodoContext from "../Context/TodoContext";
 
 function Home() {
-  const { text, setText, handleAdd, todos } = useContext(TodoContext);
+  const { text, setText, handleAdd, todos, deleteTodo, toggleDone, done } = useContext(TodoContext);
   return (
     <>
       <div>
@@ -38,17 +38,28 @@ function Home() {
             >
               <input
                 type="checkbox"
+                checked={done}
+                onChange={toggleDone}
                 className="w-4 h-4 text-green-600 focus:ring-2 focus:ring-green-400 mx-2"
               />
               <input
-                className="w-170 h-10 py-3 font-black text-xl font-sans"
+                className={
+                  "w-170 h-10 py-3 " +
+                  (done
+                    ? "line-through font-black text-xl font-mono"
+                    : "font-black text-xl font-sans")
+                }
                 value={todo.text}
+                readOnly
                 type="text"
               />
-              <button class="p-2 rounded-full ml-auto hover:bg-gray-200">
+              <button
+                onClick={() => deleteTodo(todo.id)}
+                class="p-2 rounded-full ml-auto cursor-pointer"
+              >
                 <img src={DeleteIcon} alt="Delete" className="w-6 h-6 " />
               </button>
-              <button class="p-2 rounded-full ml-auto hover:bg-gray-200">
+              <button class="p-2 rounded-full ml-auto cursor-pointer">
                 <img src={EditIcon} alt="Edit" className="w-6 h-6" />
               </button>
               <div></div>

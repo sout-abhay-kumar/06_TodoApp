@@ -6,10 +6,17 @@ const TodoContextProvider = ({ children }) => {
     const savedTodos = localStorage.getItem("todos");
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
+    
+    const [done, setDone] = useState(false);
+
+    const toggleDone = () => {
+        setDone(!done);
+    }
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+    localStorage.setItem("done", JSON.stringify(done));
+  }, [todos, done]);
 
   const [text, setText] = useState("");
 
@@ -18,7 +25,7 @@ const TodoContextProvider = ({ children }) => {
       return;
     }
 
-      let updatedText = text;
+    let updatedText = text;
     const sentence = text.trim();
     const firstWord = sentence.split(" ")[0];
     const firstLetter = firstWord[0];
@@ -32,12 +39,19 @@ const TodoContextProvider = ({ children }) => {
       completed: false,
     };
 
-    setTodos([...todos, newTodos]);
+    setTodos([newTodos, ...todos]);
     setText("");
-  };
+    };
+    
+    const deleteTodo = (id) => {
+        const newTodo = todos.filter((todo) => todo.id !== id);
+        setTodos(newTodo);
+    }
 
   return (
-    <TodoContext.Provider value={{ setText, setTodos, todos, handleAdd, text }}>
+    <TodoContext.Provider
+      value={{ setText, setTodos, todos, handleAdd, text, deleteTodo, done, setDone, toggleDone }}
+    >
       {children}
     </TodoContext.Provider>
   );
