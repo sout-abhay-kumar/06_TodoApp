@@ -6,17 +6,18 @@ const TodoContextProvider = ({ children }) => {
     const savedTodos = localStorage.getItem("todos");
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
-    
-    const [done, setDone] = useState(false);
 
-    const toggleDone = () => {
-        setDone(!done);
-    }
+  const toggleTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-    localStorage.setItem("done", JSON.stringify(done));
-  }, [todos, done]);
+  }, [todos]);
 
   const [text, setText] = useState("");
 
@@ -41,16 +42,24 @@ const TodoContextProvider = ({ children }) => {
 
     setTodos([newTodos, ...todos]);
     setText("");
-    };
-    
-    const deleteTodo = (id) => {
-        const newTodo = todos.filter((todo) => todo.id !== id);
-        setTodos(newTodo);
-    }
+  };
+
+  const deleteTodo = (id) => {
+    const newTodo = todos.filter((todo) => todo.id !== id);
+    setTodos(newTodo);
+  };
 
   return (
     <TodoContext.Provider
-      value={{ setText, setTodos, todos, handleAdd, text, deleteTodo, done, setDone, toggleDone }}
+      value={{
+        setText,
+        setTodos,
+        todos,
+        handleAdd,
+        text,
+        deleteTodo,
+        toggleTodo,
+      }}
     >
       {children}
     </TodoContext.Provider>
