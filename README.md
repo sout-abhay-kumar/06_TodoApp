@@ -40,6 +40,8 @@ npm run dev
 
 4. Open your browser and go to http://localhost:5713 to see the app.
 
+---
+
 ## Contributing
 Contributions are welcome and encouraged! Whether you want to fix bugs, add new features, or improve the design, anyone can contribute to this project.
 
