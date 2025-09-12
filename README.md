@@ -28,17 +28,17 @@ This app allows you to **add, edit, delete, and mark tasks as complete**, while 
 ##  Installation
 
 1. Clone this repository:
-   git clone https://github.com/<your-username>/<repo-name>.git
-   cd <repo-name>
+   `git clone https://github.com/<your-username>/<repo-name>.git`
+   `cd <repo-name>`
 
 
 2. Install dependencies:
-   npm install
+   `npm install`
 
 4. Start the development server:
-   npm run dev
+   `npm run dev`
 
-5. Open your browser and go to http://localhost:5713 to see the app.
+5. Open your browser and go to `http://localhost:5713` to see the app.
 
 ---
 
