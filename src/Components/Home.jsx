@@ -5,7 +5,7 @@ import EditIcon from "../icons8-edit-30.png";
 import TodoContext from "../Context/TodoContext";
 
 function Home() {
-  const { text, setText, handleAdd, todos, deleteTodo, toggleTodo } =
+  const { text, setText, handleAdd, todos, deleteTodo, toggleTodo, editTodo, saveEdit, updateTodoText } =
     useContext(TodoContext);
   return (
     <>
@@ -53,16 +53,23 @@ function Home() {
                     : "font-black text-xl font-sans")
                 }
                 value={todo.text}
-                readOnly
+                onChange={(e) => updateTodoText(todo.id, e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") saveEdit(todo.id);
+                }}
+                readOnly={!todo.isEditing}
                 type="text"
               />
               <button
                 onClick={() => deleteTodo(todo.id)}
-                className = "p-2 rounded-full ml-auto cursor-pointer"
+                className="p-2 rounded-full ml-auto cursor-pointer"
               >
                 <img src={DeleteIcon} alt="Delete" className="w-6 h-6 " />
               </button>
-              <button className ="p-2 rounded-full ml-auto cursor-pointer">
+              <button
+                onClick={() => editTodo(todo.id)}
+                className="p-2 rounded-full ml-auto cursor-pointer"
+              >
                 <img src={EditIcon} alt="Edit" className="w-6 h-6" />
               </button>
               <div></div>

@@ -38,6 +38,7 @@ const TodoContextProvider = ({ children }) => {
       id: Date.now(),
       text: updatedText,
       completed: false,
+      isEditing: false,
     };
 
     setTodos([newTodos, ...todos]);
@@ -47,6 +48,28 @@ const TodoContextProvider = ({ children }) => {
   const deleteTodo = (id) => {
     const newTodo = todos.filter((todo) => todo.id !== id);
     setTodos(newTodo);
+  };
+
+  const editTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isEditing: true } : todo
+      )
+    );
+  };
+
+  const updateTodoText = (id, newText) => {
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo))
+    );
+  };
+
+  const saveEdit = (id, newText) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, text: newText, isEditing: false } : todo
+      )
+    );
   };
 
   return (
@@ -59,6 +82,9 @@ const TodoContextProvider = ({ children }) => {
         text,
         deleteTodo,
         toggleTodo,
+        editTodo,
+        saveEdit, 
+        updateTodoText
       }}
     >
       {children}
