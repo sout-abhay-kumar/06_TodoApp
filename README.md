@@ -32,20 +32,22 @@ This app allows you to **add, edit, delete, and mark tasks as complete**, while 
    cd <repo-name>
 
 
-2. Install dependencies: npm install
+2. Install dependencies:
+   npm install
 
-3. Start the development server:
+4. Start the development server:
+   npm run dev
 
-npm run dev
-
-4. Open your browser and go to http://localhost:5713 to see the app.
+5. Open your browser and go to http://localhost:5713 to see the app.
 
 ---
 
 ## Contributing
+
 Contributions are welcome and encouraged! Whether you want to fix bugs, add new features, or improve the design, anyone can contribute to this project.
 
 ## How to Contribute:
+
 1. Fork the repository and Create your feature branch:
 git checkout -b feature/your-feature-name
 
